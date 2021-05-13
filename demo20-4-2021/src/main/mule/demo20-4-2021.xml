@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="94733184-2cf2-4875-b963-07db5c7d0193" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<http:listener-config name="HTTP_Listener_config1" doc:name="HTTP Listener config" doc:id="61bb735d-635d-46db-8709-1f8696f26428" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="demo20-4-2021Flow" doc:id="a8672f3e-5de8-4262-99be-ddad9f17a822" >
+		<http:listener doc:name="Listener" doc:id="8934acd1-cc00-42e9-8e9d-d0906accf3e8" config-ref="HTTP_Listener_config1" path="/demo"/>
+		<logger level="INFO" doc:name="Logger" doc:id="3e7c5452-3b3f-4244-b072-48321c32ffbd" message="**message got invoked**"/>
+	</flow>
+</mule>

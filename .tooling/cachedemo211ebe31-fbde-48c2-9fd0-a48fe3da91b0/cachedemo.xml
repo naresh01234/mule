@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="aebcf908-8fda-4dc6-98db-e268bed03d15" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="cachedemoFlow" doc:id="02b88065-5ada-4b28-bea2-928e7e9171bf" >
+		<http:listener doc:name="Listener" doc:id="f74d5c60-c761-44b7-9f2f-8f3ac83180c6" />
+		<logger level="INFO" doc:name="Logger" doc:id="cdf634bd-fa23-4f18-924b-8932b754c615" />
+		<db:select doc:name="Select" doc:id="04f2db8b-728b-4474-b91c-46d849b3392a" />
+	</flow>
+</mule>

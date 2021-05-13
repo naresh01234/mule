@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="30e0aeb0-a8ad-4573-b150-e6996731800b" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<db:config name="Database_Config" doc:name="Database Config" doc:id="ca01db8f-4fe0-4c4d-ae94-c010b7178c51" >
+		<db:my-sql-connection host="localhost" port="3306" user="root" password="root" database="naresh" />
+	</db:config>
+	<flow name="dbdemo1Flow" doc:id="bd48af82-24d8-4fad-af8c-620bbaf3e658" >
+		<http:listener doc:name="Listener" doc:id="7b57d390-f981-47bc-bd1a-882aa0d03d96" config-ref="HTTP_Listener_config" path="/dbdemo"/>
+		<db:select doc:name="Select" doc:id="80d415d6-7b1c-4ee8-9ef9-0a39fa309d53" config-ref="Database_Config">
+			<db:sql ><![CDATA[select * from products]]></db:sql>
+		</db:select>
+		<ee:transform doc:name="Transform Message" doc:id="d0fdeb18-dc11-406e-b2b1-6d6f224bfe4e" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>
